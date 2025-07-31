@@ -161,7 +161,7 @@ function startPayment() {
         }));
     } else {
         // Для тестирования вне Telegram
-        window.location.href = 'https://t.me/YOUR_PAYMENT_BOT_USERNAME';
+        window.location.href = 'https://t.me/qq222qq2q2dkbot';
     }
 }
 
