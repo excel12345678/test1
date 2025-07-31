@@ -1,111 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Premium</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Мой сайт</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: #0088cc;
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0px 25px 3px rgb(0 136 204 / 15%);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0px 25px 3px rgb(0 136 204 / 15%);
+        }
+
+        .logo svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 60px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Адаптивность для планшетов */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+                max-width: 500px;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 30px;
+            }
+
+            .logo svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .btn {
+                padding: 16px 50px;
+                font-size: 17px;
+                min-width: 280px;
+            }
+
+            .buttons-container {
+                gap: 18px;
+            }
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 480px) {
+            .container {
+                max-width: 400px;
+            }
+
+            .logo {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 25px;
+            }
+
+            .logo svg {
+                width: 35px;
+                height: 35px;
+            }
+
+            .btn {
+                padding: 14px 40px;
+                font-size: 16px;
+                min-width: 250px;
+            }
+
+            .buttons-container {
+                gap: 15px;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 320px) {
+            .btn {
+                padding: 12px 30px;
+                font-size: 15px;
+                min-width: 220px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Экран выбора языка -->
-    <div id="languageScreen" class="screen active">
-        <div class="container">
-            <h1 class="animated-title">Telegram Premium</h1>
-            <div class="language-grid">
-                <button class="language-btn" onclick="selectLanguage('en')">
-                    <span class="flag">🇬🇧</span>
-                    <span>English</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('ru')">
-                    <span class="flag">🇷🇺</span>
-                    <span>Русский</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('uk')">
-                    <span class="flag">🇺🇦</span>
-                    <span>Українська</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('fr')">
-                    <span class="flag">🇫🇷</span>
-                    <span>Français</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('es')">
-                    <span class="flag">🇪🇸</span>
-                    <span>Español</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('it')">
-                    <span class="flag">🇮🇹</span>
-                    <span>Italiano</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('de')">
-                    <span class="flag">🇩🇪</span>
-                    <span>Deutsch</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('mx')">
-                    <span class="flag">🇲🇽</span>
-                    <span>Español (MX)</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('uz')">
-                    <span class="flag">🇺🇿</span>
-                    <span>O'zbek</span>
-                </button>
-                <button class="language-btn" onclick="selectLanguage('ar')">
-                    <span class="flag">🇸🇦</span>
-                    <span>العربية</span>
-                </button>
-            </div>
+    <div class="container">
+        <!-- Логотип Telegram -->
+        <div class="logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 2.1 11.75c-1.02-.31-.04-.98.22-1.09L21.26 4.5c.84-.35 1.61.2 1.32 1.1L20.16 18.75c-.19.85-.74 1.05-1.5.65L12.5 16.5 9.78 18.65z"/>
+            </svg>
+        </div>
+
+        <!-- Кнопки с ссылками -->
+        <div class="buttons-container">
+            <a href="https://example.com/page1" class="btn">ОСНОВНОЙ БОТ №1</a>
+            <a href="https://example.com/page2" class="btn">ЗАПАСНОЙ БОТ №2</a>
+            <a href="https://example.com/page3" class="btn">ЗАПАСНОЙ БОТ №3</a>
+            <a href="https://example.com/page4" class="btn">ЗАПАСНОЙ БОТ №4</a>
+            <a href="https://example.com/page5" class="btn">ЗАПАСНОЙ БОТ №5</a>
         </div>
     </div>
-
-    <!-- Экран покупки -->
-    <div id="purchaseScreen" class="screen">
-        <div class="container">
-            <div class="premium-card animated-card">
-                <div class="premium-icon">
-                    <svg width="120" height="120" viewBox="0 0 120 120">
-                        <circle cx="60" cy="60" r="55" fill="url(#gradient)" />
-                        <path d="M60 20 L75 50 L45 50 Z" fill="white" />
-                        <path d="M60 100 L45 70 L75 70 Z" fill="white" />
-                    </svg>
-                    <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </div>
-                <h2 id="premiumTitle">Telegram Premium</h2>
-                <p id="premiumDuration">1 Year</p>
-                <div class="price">
-                    <span class="star-icon">⭐</span>
-                    <span class="price-amount">499</span>
-                </div>
-                <ul class="features">
-                    <li id="feature1">No ads</li>
-                    <li id="feature2">Faster downloads</li>
-                    <li id="feature3">Voice to text</li>
-                    <li id="feature4">Premium stickers</li>
-                </ul>
-                <button id="purchaseBtn" class="purchase-btn" onclick="startPayment()">
-                    <span id="purchaseBtnText">Buy Now</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Экран успеха -->
-    <div id="successScreen" class="screen">
-        <div class="container">
-            <div class="success-animation">
-                <div class="checkmark-circle">
-                    <div class="checkmark draw"></div>
-                </div>
-                <h2 id="successTitle">Payment Successful!</h2>
-                <p id="successMessage">Your Telegram Premium is now active</p>
-                <div class="confetti"></div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
