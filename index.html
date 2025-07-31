@@ -3,211 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Bot Web App</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        .premium-card {
-            background-color: var(--tg-theme-secondary-bg-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .price {
-            font-size: 36px;
-            font-weight: bold;
-            color: var(--tg-theme-button-color);
-            margin: 20px 0;
-        }
-        .features {
-            list-style: none;
-            padding: 0;
-        }
-        .features li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--tg-theme-hint-color);
-        }
-        .features li:before {
-            content: "✓ ";
-            color: #4CAF50;
-            font-weight: bold;
-        }
-        .buy-button {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--tg-theme-button-color);
-            color: var(--tg-theme-button-text-color);
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .buy-button:hover {
-            opacity: 0.8;
-        }
-        .language-selector {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        select {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid var(--tg-theme-hint-color);
-            background-color: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-            font-size: 16px;
-        }
-    </style>
+    <title>Telegram Premium</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="language-selector">
-            <select id="languageSelect" onchange="changeLanguage()">
-                <option value="en">🇬🇧 English</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="uk">🇺🇦 Українська</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="es">🇪🇸 Español</option>
-            </select>
-        </div>
-
-        <div class="premium-card">
-            <h1 id="title">Premium Access</h1>
-            <p id="description">Get unlimited access to all features</p>
-            <div class="price" id="price">\$9.99</div>
-            <ul class="features" id="features">
-                <li>Unlimited messages</li>
-                <li>Priority support</li>
-                <li>Advanced features</li>
-                <li>No advertisements</li>
-            </ul>
-            <button class="buy-button" onclick="buyPremium()" id="buyButton">
-                Buy Premium
-            </button>
+    <!-- Экран выбора языка -->
+    <div id="languageScreen" class="screen active">
+        <div class="container">
+            <h1 class="animated-title">Telegram Premium</h1>
+            <div class="language-grid">
+                <button class="language-btn" onclick="selectLanguage('en')">
+                    <span class="flag">🇬🇧</span>
+                    <span>English</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('ru')">
+                    <span class="flag">🇷🇺</span>
+                    <span>Русский</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('uk')">
+                    <span class="flag">🇺🇦</span>
+                    <span>Українська</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('fr')">
+                    <span class="flag">🇫🇷</span>
+                    <span>Français</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('es')">
+                    <span class="flag">🇪🇸</span>
+                    <span>Español</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('it')">
+                    <span class="flag">🇮🇹</span>
+                    <span>Italiano</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('de')">
+                    <span class="flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('mx')">
+                    <span class="flag">🇲🇽</span>
+                    <span>Español (MX)</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('uz')">
+                    <span class="flag">🇺🇿</span>
+                    <span>O'zbek</span>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('ar')">
+                    <span class="flag">🇸🇦</span>
+                    <span>العربية</span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <script>
-        // Инициализация Telegram Web App
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
+    <!-- Экран покупки -->
+    <div id="purchaseScreen" class="screen">
+        <div class="container">
+            <div class="premium-card animated-card">
+                <div class="premium-icon">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="55" fill="url(#gradient)" />
+                        <path d="M60 20 L75 50 L45 50 Z" fill="white" />
+                        <path d="M60 100 L45 70 L75 70 Z" fill="white" />
+                    </svg>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </div>
+                <h2 id="premiumTitle">Telegram Premium</h2>
+                <p id="premiumDuration">1 Year</p>
+                <div class="price">
+                    <span class="star-icon">⭐</span>
+                    <span class="price-amount">499</span>
+                </div>
+                <ul class="features">
+                    <li id="feature1">No ads</li>
+                    <li id="feature2">Faster downloads</li>
+                    <li id="feature3">Voice to text</li>
+                    <li id="feature4">Premium stickers</li>
+                </ul>
+                <button id="purchaseBtn" class="purchase-btn" onclick="startPayment()">
+                    <span id="purchaseBtnText">Buy Now</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
-        // Переводы
-        const translations = {
-            en: {
-                title: "Premium Access",
-                description: "Get unlimited access to all features",
-                price: "\$9.99",
-                features: [
-                    "Unlimited messages",
-                    "Priority support",
-                    "Advanced features",
-                    "No advertisements"
-                ],
-                buyButton: "Buy Premium"
-            },
-            ru: {
-                title: "Премиум доступ",
-                description: "Получите неограниченный доступ ко всем функциям",
-                price: "\$9.99",
-                features: [
-                    "Неограниченные сообщения",
-                    "Приоритетная поддержка",
-                    "Расширенные функции",
-                    "Без рекламы"
-                ],
-                buyButton: "Купить Премиум"
-            },
-            uk: {
-                title: "Преміум доступ",
-                description: "Отримайте необмежений доступ до всіх функцій",
-                price: "\$9.99",
-                features: [
-                    "Необмежені повідомлення",
-                    "Пріоритетна підтримка",
-                    "Розширені функції",
-                    "Без реклами"
-                ],
-                buyButton: "Купити Преміум"
-            }
-        };
+    <!-- Экран успеха -->
+    <div id="successScreen" class="screen">
+        <div class="container">
+            <div class="success-animation">
+                <div class="checkmark-circle">
+                    <div class="checkmark draw"></div>
+                </div>
+                <h2 id="successTitle">Payment Successful!</h2>
+                <p id="successMessage">Your Telegram Premium is now active</p>
+                <div class="confetti"></div>
+            </div>
+        </div>
+    </div>
 
-        let currentLang = 'en';
-
-        // Получаем язык из параметров запуска
-        const urlParams = new URLSearchParams(window.location.search);
-        const langParam = urlParams.get('lang');
-        if (langParam && translations[langParam]) {
-            currentLang = langParam;
-            document.getElementById('languageSelect').value = langParam;
-        }
-
-        function changeLanguage() {
-            const select = document.getElementById('languageSelect');
-            currentLang = select.value;
-            updateUI();
-        }
-
-        function updateUI() {
-            const trans = translations[currentLang] || translations['en'];
-            document.getElementById('title').textContent = trans.title;
-            document.getElementById('description').textContent = trans.description;
-            document.getElementById('price').textContent = trans.price;
-            document.getElementById('buyButton').textContent = trans.buyButton;
-            
-            const featuresList = document.getElementById('features');
-            featuresList.innerHTML = '';
-            trans.features.forEach(feature => {
-                const li = document.createElement('li');
-                li.textContent = feature;
-                featuresList.appendChild(li);
-            });
-        }
-
-        function buyPremium() {
-            // Отправляем данные обратно в бот
-            tg.sendData(JSON.stringify({
-                action: 'buy_premium',
-                language: currentLang,
-                user_id: tg.initDataUnsafe.user.id
-            }));
-            
-            // Показываем уведомление
-            tg.showAlert('Processing your purchase...', () => {
-                // Закрываем Web App после показа уведомления
-                tg.close();
-            });
-        }
-
-        // Инициализация UI
-        updateUI();
-
-        // Настройка кнопки "Назад"
-        tg.BackButton.show();
-        tg.BackButton.onClick(() => {
-            tg.close();
-        });
-
-        // Настройка основной кнопки (альтернативный способ покупки)
-        tg.MainButton.text = translations[currentLang].buyButton;
-        tg.MainButton.show();
-        tg.MainButton.onClick(() => {
-            buyPremium();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
